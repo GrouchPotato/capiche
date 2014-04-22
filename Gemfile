@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 gem 'rails', '4.1.0'
 gem 'mysql2'
 gem 'sass-rails', '~> 4.0.3'
@@ -11,6 +10,8 @@ group :development, :test do
 end
 
 group :test do
-  gem 'rspec'
-  gem 'factory_girl'
+  gem 'rspec-rails'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
+  gem 'factory_girl_rails', '~> 4.0'
 end
