@@ -7,6 +7,7 @@ describe Subject do
 
   describe :validations do
     specify { build(:subject, slug: nil).should_not be_valid }
+    specify { build(:subject, title: nil).should_not be_valid }
 
     it "should not allow duplicate slugs" do
       create(:subject, slug: 'duplicate-slug')

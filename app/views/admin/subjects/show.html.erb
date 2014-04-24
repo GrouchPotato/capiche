@@ -1,0 +1,7 @@
+<%= link_to "Back", admin_subjects_path %>
+<h1><%= @subject.title %></h1>
+<dl>
+  <dt>Intro:</dt>
+  <dd><%= @subject.intro %></dd>
+</dl>
+<%= link_to "Edit", edit_admin_subject_path(@subject) %>

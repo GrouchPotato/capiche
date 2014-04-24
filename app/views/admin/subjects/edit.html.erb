@@ -1,0 +1,12 @@
+<h1>Edit subject</h1>
+
+<%= form_for [:admin, @subject], html: {class: "subject"} do |form| %>
+  <%= form.label :title %>
+  <%= form.text_field :title %>
+
+  <%= form.label :intro %>
+  <%= form.text_area :intro, rows: 5, cols: 40 %>
+
+  <%= link_to "Cancel", admin_subject_path(@subject) %>
+  <%= form.submit "Save" %>
+<% end %>
