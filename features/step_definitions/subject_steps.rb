@@ -17,7 +17,7 @@ end
 When(/^I change the slug, title and intro fields$/) do
   fill_in "Slug", with: @new_slug = "llama-identification"
   fill_in "Title", with: @new_title = "How to tell a panda from a stick of asparagus"
-  fill_in "Intro", with: @new_intro = "Pandas, when seen from a specific angle on a dark night, can look exactly like asparagus. This questionaire will help you tell the difference."
+  fill_in "Intro", with: @new_intro = "Pandas, when seen from a specific angle on a dar k night, can look exactly like asparagus. This questionaire will help you tell the difference."
 end
 
 Then(/^I should see a form for the subject with slug, title and intro fields$/) do
@@ -44,4 +44,21 @@ Then(/^I can see the introduction information for the subject "(.*?)"$/) do |tit
   subject = Subject.find_by_title(title)
   page.should have_content subject.title
   page.should have_content subject.intro
+end
+
+Given(/^the simple yes\/no question tax subject fixture exists$/) do
+  @subject = create(:yes_no_tax_fixture)
+end
+
+When(/^I answer yes to "(.*?)"$/) do |question_text|
+  question = Question.find_by_text(question_text)
+  within(".#{question.key}") do
+    select("Yes")
+  end
+  click_on "Next question"
+end
+
+Then(/^I can see that I should pay tax$/) do
+  page.should have_text "You should pay taxes."
+  page.should_not have_text "You should not pay taxes."
 end

@@ -4,5 +4,5 @@ Rails.application.routes.draw do
     resources :subjects, except: [:new, :create, :destroy]
   end
 
-  get '/:slug(/*answers)' => 'subjects#show', as: 'subject'
+  get '/:slug' => 'subjects#show', as: 'subject'
 end

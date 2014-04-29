@@ -11,12 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140423035607) do
+ActiveRecord::Schema.define(version: 20140429032729) do
 
   create_table "questions", force: true do |t|
     t.integer  "subject_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "text"
+    t.string   "key"
+    t.string   "type"
   end
 
   create_table "subjects", force: true do |t|
@@ -25,6 +28,7 @@ ActiveRecord::Schema.define(version: 20140423035607) do
     t.string   "slug"
     t.string   "title"
     t.text     "intro"
+    t.text     "outcome"
   end
 
   add_index "subjects", ["slug"], name: "index_subjects_on_slug", using: :btree

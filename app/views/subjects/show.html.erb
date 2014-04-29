@@ -1,2 +1,9 @@
 <h1><%= @subject.title %></h1>
 <p><%= @subject.intro %></p>
+
+<form method="get" action="<%= subject_path @subject %>">
+  <ol>
+    <%= render @subject.questions %>
+  </ol>
+  <input type="submit" value="Submit" />
+</form>
