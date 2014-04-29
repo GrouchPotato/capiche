@@ -1,4 +1,4 @@
-class Subject < ActiveRecord::Base
+class Schema::Subject < ActiveRecord::Base
   has_many :questions, inverse_of: :subject
 
   validates :slug, presence: true, uniqueness: true

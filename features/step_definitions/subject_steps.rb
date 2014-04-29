@@ -1,9 +1,9 @@
 Given(/^a subject$/) do
-  @subject = create(:subject)
+  @subject = create(:schema_subject)
 end
 
 Given(/^a subject titled "(.*?)"$/) do |title|
-  @subject = create(:subject, title: title, intro: "This is the subject intro")
+  @subject = create(:schema_subject, title: title, intro: "This is the subject intro")
 end
 
 When(/^I visit the admin root$/) do
@@ -36,12 +36,12 @@ end
 
 
 When(/^I view the subject "(.*?)"$/) do |title|
-  subject = Subject.find_by_title(title)
+  subject = Schema::Subject.find_by_title(title)
   visit subject_path(subject)
 end
 
 Then(/^I can see the introduction information for the subject "(.*?)"$/) do |title|
-  subject = Subject.find_by_title(title)
+  subject = Schema::Subject.find_by_title(title)
   page.should have_content subject.title
   page.should have_content subject.intro
 end
@@ -51,7 +51,7 @@ Given(/^the simple yes\/no question tax subject fixture exists$/) do
 end
 
 When(/^I answer yes to "(.*?)"$/) do |question_text|
-  question = Question.find_by_text(question_text)
+  question = Schema::Question.find_by_text(question_text)
   within(".#{question.key}") do
     select("Yes")
   end

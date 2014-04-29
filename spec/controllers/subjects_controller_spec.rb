@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe SubjectsController do
   context "with a subject" do
-    let(:subject) { create(:subject, slug: 'subject') }
+    let(:subject) { create(:schema_subject, slug: 'subject') }
     before { get :show, slug: subject.slug }
 
     specify {

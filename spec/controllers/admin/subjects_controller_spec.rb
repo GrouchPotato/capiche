@@ -5,7 +5,7 @@ describe Admin::SubjectsController do
     before { get :index }
 
     context "With some subjects" do
-      let!(:subjects) { 2.times.map {|n| create :subject } }
+      let!(:subjects) { 2.times.map {|n| create :schema_subject } }
 
       specify { assigns(:subjects).should == subjects }
     end
@@ -21,7 +21,7 @@ describe Admin::SubjectsController do
     end
 
     context "with a subject" do
-      let(:subject) { create :subject }
+      let(:subject) { create :schema_subject }
       let(:subject_slug) { subject.try(:slug) }
 
       specify { assigns(:subject).should == subject }
@@ -38,7 +38,7 @@ describe Admin::SubjectsController do
     end
 
     context "with a subject" do
-      let(:subject) { create :subject }
+      let(:subject) { create :schema_subject }
       let(:subject_slug) { subject.try(:slug) }
 
       specify { assigns(:subject).should == subject }
@@ -46,7 +46,7 @@ describe Admin::SubjectsController do
   end
 
   describe "PUT update" do
-    let(:subject) { create(:subject) }
+    let(:subject) { create :schema_subject }
     let(:subject_slug) { subject.try(:slug) }
     let(:subject_params) { {
       title: "Another title",
