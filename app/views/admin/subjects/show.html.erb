@@ -1,6 +1,8 @@
 <%= link_to "Back", admin_subjects_path %>
 <h1><%= @subject.title %></h1>
 <dl>
+  <dt>Slug:</dt>
+  <dd><%= @subject.slug %></dd>
   <dt>Intro:</dt>
   <dd><%= @subject.intro %></dd>
 </dl>

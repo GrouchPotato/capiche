@@ -20,6 +20,6 @@ private
   end
 
   def subject_params
-    params[:subject].permit(:title, :intro)
+    params[:subject].permit(:title, :slug, :intro)
   end
 end
