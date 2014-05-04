@@ -5,6 +5,6 @@ FactoryGirl.define do
     association :subject, factory: :subject
   end
 
-  factory :yes_no_question, parent: :question do
+  factory :yes_no_question, parent: :question, class: YesNoQuestion do
   end
 end

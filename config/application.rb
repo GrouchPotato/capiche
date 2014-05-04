@@ -16,5 +16,6 @@ Bundler.require(*Rails.groups)
 module Capiche
   class Application < Rails::Application
     config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += %W(#{config.root}/app/models/collection_extensions)
   end
 end

@@ -11,4 +11,8 @@ class Question < ActiveRecord::Base
   def parse_answer(raw_answer)
     self.class.parse_answer(raw_answer)
   end
+
+  def to_partial_path
+    "questions/#{self.class.name.underscore}"
+  end
 end

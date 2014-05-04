@@ -53,4 +53,11 @@ describe Capiche::Context do
       subject['question_2'].should == :parsed_answer_2
     end
   end
+
+  describe :next_question do
+    it "should ask the question collection for the next question" do
+      capiche_subject.questions.stub(:next).with(subject).and_return(:the_next_question)
+      subject.next_question.should == :the_next_question
+    end
+  end
 end

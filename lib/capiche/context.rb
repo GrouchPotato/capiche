@@ -14,6 +14,10 @@ class Capiche::Context
     answers.has_key?(key.to_s)
   end
 
+  def next_question
+    subject.questions.next(self)
+  end
+
 private
   def parse_answers(answers)
     answers = answers.dup

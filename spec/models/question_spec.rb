@@ -17,4 +17,12 @@ describe Question do
       end
     end
   end
+
+  describe "identification for partial rendering" do
+    describe :to_partial_path do
+      it "should return 'questions/class_name'" do
+        build(:yes_no_question).to_partial_path.should == 'questions/yes_no_question'
+      end
+    end
+  end
 end
