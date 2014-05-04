@@ -1,9 +1,11 @@
 <h1><%= context.subject.title %></h1>
 <p><%= context.subject.intro %></p>
 
-<form method="get" action="<%= subject_path context.subject %>">
-  <ol>
+<ol>
+  <% if !context.all_answered? %>
     <%= render context.next_question %>
-  </ol>
-  <input type="submit" value="Submit" />
-</form>
+  <% end %>
+</ol>
+<% if context.all_answered? %>
+  <%= context.render_outcome %>
+<% end %>

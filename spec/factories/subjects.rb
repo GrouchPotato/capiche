@@ -15,10 +15,10 @@ FactoryGirl.define do
       ] }
       outcome "
         {{#is_human}}
-          You should pay taxes
+          You should pay taxes.
         {{/is_human}}
         {{^is_human}}
-          You should not pay taxes
+          You should not pay taxes.
         {{/is_human}}
       "
     end

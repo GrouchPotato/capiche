@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe ApplicationHelper do
   describe :previous_answer_fields do
-    it "should return a list of hidden fields" do
-      answers = { "is_human" => 'yes', "is_hairy" => 'no' }
+    it "should return a list of hidden fields, converting bools to yes/no" do
+      answers = { "is_human" => true, "is_hairy" => false }
       rendered_fields = Nokogiri::HTML::DocumentFragment.parse(helper.previous_answer_fields(answers)).css('input')
 
       rendered_fields[0][:type].should == 'hidden'

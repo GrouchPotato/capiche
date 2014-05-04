@@ -18,6 +18,14 @@ class Capiche::Context
     subject.questions.next(self)
   end
 
+  def all_answered?
+    next_question.nil?
+  end
+
+  def render_outcome
+    Mustache.render(subject.outcome, self)
+  end
+
 private
   def parse_answers(answers)
     answers = answers.dup

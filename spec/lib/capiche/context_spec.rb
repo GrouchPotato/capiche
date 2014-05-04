@@ -60,4 +60,39 @@ describe Capiche::Context do
       subject.next_question.should == :the_next_question
     end
   end
+
+  describe :all_answered? do
+    let(:question_1) { build(:question, key: 'question_1') }
+    let(:question_2) { build(:question, key: 'question_2') }
+    let(:questions) {
+      [question_1, question_2]
+    }
+
+    context "when there's an answer for each question" do
+      let(:answers) { {
+        'question_1' => 'answer_1',
+        'question_2' => 'answer_2'
+      } }
+
+      specify { subject.all_answered?.should be_true }
+    end
+
+    context "when there's an answer missing" do
+      let(:answers) { {
+        'question_1' => 'answer_1'
+      } }
+
+      specify { subject.all_answered?.should be_false }
+    end
+  end
+
+  describe :render_outcome do
+    let(:outcome) { "Dodgey mustache" }
+    let(:capiche_subject) { build(:subject, outcome: outcome) }
+
+    it "should use mustache to render the outcome, passing itself as the mustache context hash" do
+      Mustache.should_receive(:render).with(outcome, subject).and_return(:rendered_outcome)
+      subject.render_outcome.should == :rendered_outcome
+    end
+  end
 end
