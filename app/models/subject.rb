@@ -1,25 +1,12 @@
-class Subject < ModelBase
-  attr_reader :schema, :questions
+require_relative 'collection_extensions/question_collection_extensions.rb'
 
-  delegate :title, :intro, to: :schema
+class Subject < ActiveRecord::Base
+  has_many :questions, -> { extending QuestionCollectionExtensions }
 
-  def initialize(schema, answers = {})
-    @schema = schema
-    build_questions(schema, answers)
-  end
+  validates :slug, presence: true, uniqueness: true
+  validates :title, presence: true
 
   def to_param
-    schema.slug
-  end
-
-private
-  def build_questions(schema, answers)
-    @questions = schema.questions.map do |schema_question|
-      question_klass = Object.const_get(schema_question.type.sub('Schema::', ''))
-      question_klass.new({
-        text: schema_question.text,
-        answer: answers[schema_question.key]
-      })
-    end
+    slug
   end
 end

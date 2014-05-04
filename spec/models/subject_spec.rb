@@ -1,38 +1,43 @@
 require 'spec_helper'
 
 describe Subject do
-  let(:subject_schema_slug) { 'a-subject' }
-  let(:subject_schema_title) { "A subject" }
-  let(:subject_schema_intro) { "This is a subject." }
-  let(:subject_schema_questions) { {} }
-  let(:subject_schema) {
-    OpenStruct.new(
-      slug: subject_schema_slug,
-      title: subject_schema_title,
-      intro: subject_schema_intro,
-      questions: subject_schema_questions
-    )
-  }
-  let(:answers) { {} }
-  subject { Subject.new(subject_schema, answers) }
-
-  describe :initialize do
-    specify { subject.should be_a Subject }
-    specify { subject.title.should == subject_schema_title }
-    specify { subject.intro.should == subject_schema_intro }
+  it "should identify by it's slug" do
+    build(:subject, slug: 'a-slug').to_param.should == 'a-slug'
   end
 
-  describe :to_param do
-    specify { subject.to_param.should == subject_schema_slug }
+  describe :validations do
+    specify { build(:subject, slug: nil).should_not be_valid }
+    specify { build(:subject, title: nil).should_not be_valid }
+
+    it "should not allow duplicate slugs" do
+      create(:subject, slug: 'duplicate-slug')
+      build(:subject, slug: 'duplicate-slug').should_not be_valid
+    end
   end
 
-  describe :build_questions do
-    let(:subject_schema_questions) { [
-      Schema::YesNoQuestion.new(key: 'is_yes', text: 'Is the answer yes?')
+  describe :questions do
+    let(:questions) { [
+      build(:question, key: 'question_1'),
+      build(:question, key: 'question_2'),
+      build(:question, key: 'question_3'),
+      build(:question, key: 'question_4')
     ] }
-    let(:answers) { {'is_yes' => true} }
-    specify { subject.questions.first.should be_a YesNoQuestion }
-    specify { subject.questions.first.text.should == 'Is the answer yes?' }
-    specify { subject.questions.first.answer.should == true }
+    let(:context) { {
+      'question_1' => 'yes',
+      'question_2' => 'yes'
+    } }
+    subject { build(:subject, questions: questions) }
+
+    describe :find_by_key do
+      specify { subject.questions.find_by_key('question_3').should == questions[2] }
+    end
+
+    describe :answered do
+      specify { subject.questions.answered(context).should == questions[0..1] }
+    end
+
+    describe :next_question do
+      specify { subject.questions.next(context).should == questions[2] }
+    end
   end
 end
