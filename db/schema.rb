@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140429032729) do
+ActiveRecord::Schema.define(version: 20140505030925) do
+
+  create_table "conditions", force: true do |t|
+    t.integer  "conditionable_id"
+    t.string   "conditionable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "conditions", ["conditionable_type", "conditionable_id"], name: "index_conditions_on_conditionable_type_and_conditionable_id", using: :btree
 
   create_table "questions", force: true do |t|
     t.integer  "subject_id"
