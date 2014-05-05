@@ -58,7 +58,24 @@ When(/^I answer yes to "(.*?)"$/) do |question_text|
   click_on "Submit"
 end
 
+When(/^I answer no to "(.*?)"$/) do |question_text|
+  question = Question.find_by_text(question_text)
+  within(".#{question.key}") do
+    choose("No")
+  end
+  click_on "Submit"
+end
+
+Then(/^I should not see the question "(.*?)"$/) do |question_text|
+  page.should_not have_text question_text
+end
+
 Then(/^I can see that I should pay tax$/) do
   page.should have_text "You should pay taxes."
   page.should_not have_text "You should not pay taxes."
+end
+
+Then(/^I can see that I should not pay taxes$/) do
+  page.should_not have_text "You should pay taxes."
+  page.should have_text "You should not pay taxes."
 end

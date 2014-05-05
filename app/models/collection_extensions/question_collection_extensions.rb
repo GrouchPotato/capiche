@@ -11,7 +11,7 @@ module QuestionCollectionExtensions
 
   def next(context)
     select {|question|
-      !context.has_key?(question.key)
+      !context.has_key?(question.key) && question.conditions.satisfied?(context)
     }.first
   end
 end

@@ -1,6 +1,6 @@
 class Question < ActiveRecord::Base
   belongs_to :subject, inverse_of: :questions
-  has_many :conditions, -> { extending ConditionCollectionExtensions }
+  has_many :conditions, -> { extending ConditionCollectionExtensions }, as: :conditionable
 
   validates :subject, :text, presence: true
   validates :key, presence: true, uniqueness: { scope: :subject }

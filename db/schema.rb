@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140505033008) do
+ActiveRecord::Schema.define(version: 20140505085022) do
 
   create_table "conditions", force: true do |t|
     t.integer  "conditionable_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20140505033008) do
     t.datetime "updated_at"
     t.string   "input_key"
     t.string   "comparator"
+    t.string   "type"
   end
 
   add_index "conditions", ["conditionable_type", "conditionable_id"], name: "index_conditions_on_conditionable_type_and_conditionable_id", using: :btree
