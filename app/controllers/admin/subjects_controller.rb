@@ -2,7 +2,7 @@ class Admin::SubjectsController < Admin::AdminController
   before_filter :get_subject_or_render_404, only: [:show, :edit, :update]
 
   def index
-    @subjects = Schema::Subject.all
+    @subjects = Subject.all
   end
 
   def update
@@ -15,11 +15,11 @@ class Admin::SubjectsController < Admin::AdminController
 
 private
   def get_subject_or_render_404
-    @subject = Schema::Subject.find_by_slug(params[:id])
+    @subject = Subject.find_by_slug(params[:id])
     render_404 if @subject.nil?
   end
 
   def subject_params
-    params[:schema_subject].permit(:title, :slug, :intro)
+    params[:subject].permit(:title, :slug, :intro)
   end
 end
