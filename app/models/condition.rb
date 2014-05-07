@@ -5,4 +5,8 @@ class Condition < ActiveRecord::Base
   def satisfied?(context)
     true
   end
+
+  def to_s
+    raise NotImplementedError
+  end
 end

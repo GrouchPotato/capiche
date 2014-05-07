@@ -1,0 +1,36 @@
+form.subject {
+  fieldset.title_and_intro {
+    width: 40%;
+    float: left;
+    margin-right: 2%;
+  }
+
+  fieldset.calculations {
+    width: 53%;
+    float: left;
+  }
+
+  fieldset.questions,
+  fieldset.outcome {
+    clear: both;
+
+    .actions a {
+      float: right;
+    }
+  }
+
+  fieldset.outcome {
+    textarea {
+      width: 60%;
+      height: 400px;
+    }
+  }
+
+  table {
+    th {
+      text-align: left;
+    }
+
+    width: 100%;
+  }
+}

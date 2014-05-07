@@ -6,4 +6,8 @@ class BoolCondition < Condition
       context[input_key].blank?
     end
   end
+
+  def to_s
+    "#{input_key} is #{comparator}"
+  end
 end

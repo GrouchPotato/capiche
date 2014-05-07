@@ -1,15 +1,61 @@
 <h1>Edit subject</h1>
 
-<%= form_for @subject, url: admin_subject_path(@subject), html: {class: "subject"} do |form| %>
-  <%= form.label :title %>
-  <%= form.text_field :title %>
+<%= form_for @subject, url: admin_subject_path(@subject), html: {class: "subject generic_form"} do |form| %>
+  <fieldset class="title_and_intro">
+    <legend>Title and intro</legend>
+    <div class="generic_field">
+      <%= form.label :title %>
+      <%= form.text_field :title %>
+    </div>
 
-  <%= form.label :slug %>
-  <%= form.text_field :slug %>
+    <div class="generic_field">
+      <%= form.label :slug %>
+      <%= form.text_field :slug %>
+    </div>
 
-  <%= form.label :intro %>
-  <%= form.text_area :intro, rows: 5, cols: 40 %>
+    <div class="generic_field">
+      <%= form.label :intro %>
+      <%= form.text_area :intro, rows: 5, cols: 40 %>
+    </div>
+  </fieldset>
 
-  <%= link_to "Cancel", admin_subject_path(@subject) %>
-  <%= form.submit "Save" %>
+  <fieldset class="calculations">
+    <legend>Calculations</legend>
+  </fieldset>
+
+  <fieldset class="questions">
+    <legend>Questions</legend>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Key</th>
+          <th>Type</th>
+          <th>Text</th>
+          <th>Conditions</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: 'form_question', collection: @subject.questions %>
+      </tbody>
+    </table>
+    <div class="actions">
+      <%= link_to 'Add', '' %>
+    </div>
+  </fieldset>
+
+  <fieldset class="outcome">
+    <legend>Outcome</legend>
+    <div class="generic_field">
+      <%= form.label :outcome, "Outcome template" %>
+      <%= form.text_area :outcome, rows: 5, cols: 40 %>
+    </div>
+  </fieldset>
+
+  <div class="actions">
+    <%= link_to "Cancel", admin_subject_path(@subject) %>
+    <%= form.submit "Save" %>
+  </div>
+
 <% end %>

@@ -65,4 +65,16 @@ describe BoolCondition do
       end
     end
   end
+
+  describe :to_s do
+    context "with a positive comparator" do
+      let(:comparator) { 'true' }
+      specify { subject.to_s.should == "context_key is true" }
+    end
+
+    context "with a negative comparator" do
+      let(:comparator) { 'false' }
+      specify { subject.to_s.should == "context_key is false" }
+    end
+  end
 end

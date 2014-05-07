@@ -27,4 +27,19 @@ describe ConditionCollectionExtensions do
       specify { subject.conditions.satisfied?(context).should be_false }
     end
   end
+
+  describe :to_s do
+    let(:conditions) {
+      conditions = [
+        satisfied_condition,
+        unsatisfied_condition
+      ]
+      conditions[0].stub(:to_s).and_return('a satisfied condition')
+      conditions[1].stub(:to_s).and_return('an usatisfied condition')
+      conditions
+    }
+    it "should concatonate results of Condition.to_s" do
+      subject.conditions.to_s.should == "a satisfied condition, an usatisfied condition"
+    end
+  end
 end
